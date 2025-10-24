@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Мистические истории</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>Мистические истории</h1>
+    <p class="tagline">Интерактивная текстовая игра для vk.com</p>
+  </header>
+
+  <main class="app-main">
+    <section class="game-panel">
+      <div class="story-view">
+        <h2 class="story-title" id="story-title">Пролог</h2>
+        <div class="story-text" id="story-text"></div>
+        <div class="option-list" id="option-list"></div>
+      </div>
+
+      <aside class="player-stats" id="player-stats">
+        <h3>Характеристика</h3>
+        <ul id="stat-list"></ul>
+        <div class="inventory">
+          <h4>Инвентарь</h4>
+          <ul id="inventory-list"></ul>
+        </div>
+      </aside>
+    </section>
+
+    <section class="admin-panel hidden" id="admin-panel">
+      <header>
+        <h2>Панель администратора</h2>
+        <button id="toggle-admin" class="ghost">Свернуть</button>
+      </header>
+      <div class="admin-content">
+        <div class="admin-section">
+          <h3>Добавить сцену</h3>
+          <form id="node-form">
+            <label>
+              Идентификатор сцены
+              <input type="text" name="nodeId" required />
+            </label>
+            <label>
+              Заголовок
+              <input type="text" name="title" required />
+            </label>
+            <label>
+              Описание
+              <textarea name="description" rows="4" required></textarea>
+            </label>
+            <button type="submit">Сохранить сцену</button>
+          </form>
+        </div>
+
+        <div class="admin-section">
+          <h3>Добавить выбор</h3>
+          <form id="choice-form">
+            <label>
+              Откуда (ID сцены)
+              <input type="text" name="fromNode" required />
+            </label>
+            <label>
+              Текст выбора
+              <input type="text" name="choiceText" required />
+            </label>
+            <label>
+              Куда (ID сцены)
+              <input type="text" name="toNode" required />
+            </label>
+            <label>
+              Изменение характеристик (например: мужество:+1,доверие:-1)
+              <input type="text" name="statChanges" placeholder="атрибут:+/-число" />
+            </label>
+            <label>
+              Предмет (добавить/убрать, формат: +амулет, -факел)
+              <input type="text" name="inventory" placeholder="например: +амулет" />
+            </label>
+            <button type="submit">Сохранить выбор</button>
+          </form>
+        </div>
+
+        <div class="admin-section">
+          <h3>Управление историей</h3>
+          <div class="admin-actions">
+            <button id="export-story">Экспорт истории</button>
+            <label class="import-label">
+              Импорт истории
+              <input type="file" id="import-story" accept="application/json" />
+            </label>
+            <button id="reset-story" class="danger">Сбросить к истории по умолчанию</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <button id="restart-game">Начать заново</button>
+    <button id="show-admin" class="ghost">Панель администратора</button>
+  </footer>
+
+  <template id="option-template">
+    <button class="option-button"></button>
+  </template>
+
+  <script src="story-data.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
