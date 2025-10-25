@@ -4,106 +4,207 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Мистические истории</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="app-header">
-    <h1>Мистические истории</h1>
-    <p class="tagline">Интерактивная текстовая игра для vk.com</p>
-  </header>
-
-  <main class="app-main">
-    <section class="game-panel">
-      <div class="story-view">
-        <h2 class="story-title" id="story-title">Пролог</h2>
-        <div class="story-text" id="story-text"></div>
-        <div class="option-list" id="option-list"></div>
-      </div>
-
-      <aside class="player-stats" id="player-stats">
-        <h3>Характеристика</h3>
-        <ul id="stat-list"></ul>
-        <div class="inventory">
-          <h4>Инвентарь</h4>
-          <ul id="inventory-list"></ul>
-        </div>
-      </aside>
-    </section>
-
-    <section class="admin-panel hidden" id="admin-panel">
-      <header>
-        <h2>Панель администратора</h2>
-        <button id="toggle-admin" class="ghost">Свернуть</button>
-      </header>
-      <div class="admin-content">
-        <div class="admin-section">
-          <h3>Добавить сцену</h3>
-          <form id="node-form">
-            <label>
-              Идентификатор сцены
-              <input type="text" name="nodeId" required />
-            </label>
-            <label>
-              Заголовок
-              <input type="text" name="title" required />
-            </label>
-            <label>
-              Описание
-              <textarea name="description" rows="4" required></textarea>
-            </label>
-            <button type="submit">Сохранить сцену</button>
-          </form>
-        </div>
-
-        <div class="admin-section">
-          <h3>Добавить выбор</h3>
-          <form id="choice-form">
-            <label>
-              Откуда (ID сцены)
-              <input type="text" name="fromNode" required />
-            </label>
-            <label>
-              Текст выбора
-              <input type="text" name="choiceText" required />
-            </label>
-            <label>
-              Куда (ID сцены)
-              <input type="text" name="toNode" required />
-            </label>
-            <label>
-              Изменение характеристик (например: мужество:+1,доверие:-1)
-              <input type="text" name="statChanges" placeholder="атрибут:+/-число" />
-            </label>
-            <label>
-              Предмет (добавить/убрать, формат: +амулет, -факел)
-              <input type="text" name="inventory" placeholder="например: +амулет" />
-            </label>
-            <button type="submit">Сохранить выбор</button>
-          </form>
-        </div>
-
-        <div class="admin-section">
-          <h3>Управление историей</h3>
-          <div class="admin-actions">
-            <button id="export-story">Экспорт истории</button>
-            <label class="import-label">
-              Импорт истории
-              <input type="file" id="import-story" accept="application/json" />
-            </label>
-            <button id="reset-story" class="danger">Сбросить к истории по умолчанию</button>
+  <div class="app-shell">
+    <div class="background background-gradient"></div>
+    <div class="background background-glow"></div>
+    <div class="app-container">
+      <header class="top-bar">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">MJ</span>
+          <div class="brand-copy">
+            <h1>Мистические истории</h1>
+            <p class="tagline">Интерактивная текстовая игра и конструктор для vk.com</p>
           </div>
         </div>
-      </div>
-    </section>
-  </main>
+        <div class="top-actions">
+          <button id="restart-game" class="pill">Начать заново</button>
+          <button id="show-admin" class="pill ghost" aria-expanded="false">Панель администратора</button>
+        </div>
+      </header>
 
-  <footer class="app-footer">
-    <button id="restart-game">Начать заново</button>
-    <button id="show-admin" class="ghost">Панель администратора</button>
-  </footer>
+      <main class="layout">
+        <section class="scene-area">
+          <div class="scene-illustration">
+            <div class="scene-overlay">
+              <div class="scene-header">
+                <span class="scene-label">Текущая сцена</span>
+                <h2 class="scene-title" id="story-title">Пролог</h2>
+              </div>
+              <div class="scene-body" id="story-text"></div>
+            </div>
+          </div>
+
+          <div class="options-card">
+            <div class="options-header">
+              <h3>Возможные действия</h3>
+              <p class="options-hint">Выберите действие, чтобы повлиять на историю</p>
+            </div>
+            <div class="option-list" id="option-list"></div>
+          </div>
+        </section>
+
+        <aside class="hud">
+          <section class="profile-card">
+            <div class="profile-header">
+              <div class="profile-avatar" aria-hidden="true">MJ</div>
+              <div class="profile-meta">
+                <p class="profile-role" id="profile-role">Mystic storyteller</p>
+                <p class="profile-name" id="profile-name">Мистические истории</p>
+              </div>
+            </div>
+            <div class="stat-list" id="stat-list"></div>
+          </section>
+
+          <section class="hud-panel">
+            <nav class="tab-nav" aria-label="Информация игрока">
+              <button class="tab-button is-active" type="button" data-tab-target="profile-panel">Профиль</button>
+              <button class="tab-button" type="button" data-tab-target="inventory-panel">Инвентарь</button>
+              <button class="tab-button" type="button" data-tab-target="skills-panel">Навыки</button>
+            </nav>
+            <div class="tab-panels">
+              <div class="tab-panel is-active" id="profile-panel">
+                <p class="story-description" id="story-description"></p>
+                <dl class="story-meta">
+                  <div class="story-meta-row">
+                    <dt>Автор</dt>
+                    <dd id="story-author"></dd>
+                  </div>
+                  <div class="story-meta-row">
+                    <dt>Версия</dt>
+                    <dd id="story-version"></dd>
+                  </div>
+                  <div class="story-meta-row">
+                    <dt>Стартовая сцена</dt>
+                    <dd id="story-start"></dd>
+                  </div>
+                </dl>
+                <div class="history-block">
+                  <h4>Хронология выборов</h4>
+                  <ul class="history-list" id="history-list"></ul>
+                </div>
+              </div>
+
+              <div class="tab-panel" id="inventory-panel">
+                <ul class="inventory-grid" id="inventory-list"></ul>
+              </div>
+
+              <div class="tab-panel" id="skills-panel">
+                <ul class="skills-list" id="skills-list"></ul>
+              </div>
+            </div>
+          </section>
+        </aside>
+      </main>
+
+      <section class="admin-panel hidden" id="admin-panel" aria-hidden="true">
+        <header class="admin-header">
+          <div>
+            <span class="admin-label">Панель администратора</span>
+            <h2>Управление историей</h2>
+            <p>Создавайте сцены, добавляйте выборы и экспортируйте прогресс.</p>
+          </div>
+          <div class="admin-controls">
+            <button id="toggle-admin" class="pill ghost" type="button">Свернуть</button>
+          </div>
+        </header>
+
+        <div class="admin-layout">
+          <aside class="admin-sidebar">
+            <label class="field">
+              <span>Поиск сцены</span>
+              <input type="search" id="scene-filter" placeholder="Введите название или ID" />
+            </label>
+            <div class="scene-list-header">
+              <h3>Сцены</h3>
+              <span class="scene-count" id="scene-count">0</span>
+            </div>
+            <ul class="scene-list" id="scene-list"></ul>
+          </aside>
+
+          <div class="admin-content">
+            <section class="form-card">
+              <header>
+                <h3>Добавить или обновить сцену</h3>
+                <p>Укажите идентификатор, название и описание сцены.</p>
+              </header>
+              <form id="node-form">
+                <label class="field">
+                  <span>Идентификатор сцены</span>
+                  <input type="text" name="nodeId" required placeholder="Например: observatory_entrance" />
+                </label>
+                <label class="field">
+                  <span>Заголовок</span>
+                  <input type="text" name="title" required placeholder="Название сцены" />
+                </label>
+                <label class="field">
+                  <span>Описание</span>
+                  <textarea name="description" rows="5" required placeholder="Опишите, что происходит в сцене"></textarea>
+                </label>
+                <button type="submit">Сохранить сцену</button>
+              </form>
+            </section>
+
+            <section class="form-card">
+              <header>
+                <h3>Добавить выбор</h3>
+                <p>Определите переход между сценами и эффекты выбора.</p>
+              </header>
+              <form id="choice-form">
+                <label class="field">
+                  <span>Откуда (ID сцены)</span>
+                  <input type="text" name="fromNode" required placeholder="Например: prologue" />
+                </label>
+                <label class="field">
+                  <span>Текст выбора</span>
+                  <input type="text" name="choiceText" required placeholder="Текст, который увидит игрок" />
+                </label>
+                <label class="field">
+                  <span>Куда (ID сцены)</span>
+                  <input type="text" name="toNode" required placeholder="Например: observatory_entrance" />
+                </label>
+                <label class="field">
+                  <span>Изменение характеристик</span>
+                  <input type="text" name="statChanges" placeholder="формат: мужество:+1, доверие:-1" />
+                </label>
+                <label class="field">
+                  <span>Инвентарь (например: +амулет, -факел)</span>
+                  <input type="text" name="inventory" placeholder="Через запятую" />
+                </label>
+                <button type="submit">Сохранить выбор</button>
+              </form>
+            </section>
+
+            <section class="form-card">
+              <header>
+                <h3>Управление историей</h3>
+                <p>Экспортируйте, импортируйте или сбросьте историю.</p>
+              </header>
+              <div class="admin-actions">
+                <button id="export-story" type="button">Экспорт истории</button>
+                <label class="import-button">
+                  Импорт истории
+                  <input type="file" id="import-story" accept="application/json" />
+                </label>
+                <button id="reset-story" type="button" class="danger">Сбросить к версии по умолчанию</button>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
 
   <template id="option-template">
-    <button class="option-button"></button>
+    <button class="option-button" type="button"></button>
   </template>
 
   <script src="story-data.js"></script>

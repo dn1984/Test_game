@@ -109,8 +109,19 @@ class UIRenderer {
     this.optionListEl = document.getElementById("option-list");
     this.statListEl = document.getElementById("stat-list");
     this.inventoryListEl = document.getElementById("inventory-list");
+    this.historyListEl = document.getElementById("history-list");
+    this.skillsListEl = document.getElementById("skills-list");
+    this.storyDescriptionEl = document.getElementById("story-description");
+    this.storyAuthorEl = document.getElementById("story-author");
+    this.storyVersionEl = document.getElementById("story-version");
+    this.storyStartEl = document.getElementById("story-start");
+    this.profileNameEl = document.getElementById("profile-name");
+    this.profileRoleEl = document.getElementById("profile-role");
     this.optionTemplate = document.getElementById("option-template");
+    this.tabButtons = Array.from(document.querySelectorAll("[data-tab-target]"));
+    this.tabPanels = Array.from(document.querySelectorAll(".tab-panel"));
     this.toast = ToastManager.global();
+    this.bindTabs();
   }
 
   render() {
@@ -122,6 +133,29 @@ class UIRenderer {
 
     this.renderOptions(node);
     this.renderStats();
+    this.renderInventory();
+    this.renderProfile();
+    this.renderHistory();
+    this.renderSkills();
+  }
+
+  bindTabs() {
+    this.tabButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        this.switchTab(button.dataset.tabTarget);
+      });
+    });
+  }
+
+  switchTab(targetId) {
+    this.tabButtons.forEach((button) => {
+      const isActive = button.dataset.tabTarget === targetId;
+      button.classList.toggle("is-active", isActive);
+    });
+    this.tabPanels.forEach((panel) => {
+      const isActive = panel.id === targetId;
+      panel.classList.toggle("is-active", isActive);
+    });
   }
 
   renderOptions(node) {
@@ -129,7 +163,7 @@ class UIRenderer {
 
     if (this.engine.isEnding(node)) {
       const ending = document.createElement("div");
-      ending.className = "notice";
+      ending.className = "ending-card";
       ending.innerHTML = `<strong>Финал: ${node.ending.type}</strong><br />${node.ending.summary}`;
       this.optionListEl.appendChild(ending);
 
@@ -146,10 +180,10 @@ class UIRenderer {
 
     const options = node.options || [];
     if (!options.length) {
-      const noOptions = document.createElement("div");
-      noOptions.className = "notice";
-      noOptions.textContent = "Здесь нет доступных действий. Вернитесь назад или перезапустите историю.";
-      this.optionListEl.appendChild(noOptions);
+      const empty = document.createElement("div");
+      empty.className = "empty-state";
+      empty.textContent = "Здесь нет доступных действий. Вернитесь назад или перезапустите историю.";
+      this.optionListEl.appendChild(empty);
       return;
     }
 
@@ -172,26 +206,184 @@ class UIRenderer {
 
   renderStats() {
     this.statListEl.innerHTML = "";
-    Object.entries(this.engine.player.stats).forEach(([stat, value]) => {
+    const stats = Object.entries(this.engine.player.stats);
+    if (!stats.length) {
+      const empty = document.createElement("div");
+      empty.className = "empty-state";
+      empty.textContent = "Характеристики пока не заданы.";
+      this.statListEl.appendChild(empty);
+      return;
+    }
+
+    const maxValue = Math.max(
+      ...stats.map(([, value]) => {
+        if (typeof value === "number" && Number.isFinite(value)) return value;
+        const numeric = Number(value);
+        return Number.isFinite(numeric) ? numeric : 0;
+      }),
+      1
+    );
+
+    stats.forEach(([stat, value]) => {
+      const container = document.createElement("div");
+      container.className = "stat-bar";
+
+      const header = document.createElement("div");
+      header.className = "stat-bar__header";
+      const label = document.createElement("span");
+      label.className = "stat-bar__label";
+      label.textContent = stat;
+      const val = document.createElement("span");
+      val.className = "stat-bar__value";
+      val.textContent = value;
+      header.append(label, val);
+
+      const meter = document.createElement("div");
+      meter.className = "stat-bar__meter";
+      const fill = document.createElement("span");
+      const numericValueRaw = Number(value);
+      const numericValue =
+        typeof value === "number" && Number.isFinite(value)
+          ? value
+          : Number.isFinite(numericValueRaw)
+          ? numericValueRaw
+          : 0;
+      const percent = Math.max(0, Math.min(100, (numericValue / maxValue) * 100));
+      fill.style.width = `${percent}%`;
+      meter.appendChild(fill);
+
+      container.append(header, meter);
+      this.statListEl.appendChild(container);
+    });
+  }
+
+  renderInventory() {
+    this.inventoryListEl.innerHTML = "";
+    const items = this.engine.player.inventory;
+    if (!items.length) {
+      const empty = document.createElement("li");
+      empty.className = "inventory-item inventory-item--empty";
+      empty.textContent = "Инвентарь пуст.";
+      this.inventoryListEl.appendChild(empty);
+      return;
+    }
+
+    items.forEach((itemName) => {
+      const li = document.createElement("li");
+      li.className = "inventory-item";
+      li.textContent = itemName;
+      this.inventoryListEl.appendChild(li);
+    });
+  }
+
+  renderProfile() {
+    const metadata = this.engine.story.metadata || {};
+    if (this.profileNameEl) {
+      this.profileNameEl.textContent = metadata.title || "Неизвестная история";
+    }
+    if (this.profileRoleEl) {
+      this.profileRoleEl.textContent = metadata.author
+        ? `Автор: ${metadata.author}`
+        : "Mystic storyteller";
+    }
+    if (this.storyDescriptionEl) {
+      this.storyDescriptionEl.textContent = metadata.description || "Описание истории пока не задано.";
+    }
+    if (this.storyAuthorEl) {
+      this.storyAuthorEl.textContent = metadata.author || "—";
+    }
+    if (this.storyVersionEl) {
+      this.storyVersionEl.textContent = metadata.version || "—";
+    }
+    if (this.storyStartEl) {
+      this.storyStartEl.textContent = this.engine.story.start || "—";
+    }
+  }
+
+  renderHistory() {
+    if (!this.historyListEl) return;
+    this.historyListEl.innerHTML = "";
+    const timeline = [...this.engine.history, this.engine.currentNode].filter(Boolean);
+    const nodes = timeline
+      .map((id) => this.engine.getNode(id))
+      .filter((node) => Boolean(node));
+    const recent = nodes.slice(-6).reverse();
+
+    if (!recent.length) {
+      const empty = document.createElement("li");
+      empty.className = "empty-state";
+      empty.textContent = "Вы ещё не делали выборов в этой сессии.";
+      this.historyListEl.appendChild(empty);
+      return;
+    }
+
+    recent.forEach((node) => {
       const item = document.createElement("li");
-      item.className = "stat-item";
-      item.innerHTML = `<span>${stat}</span><span>${value}</span>`;
-      this.statListEl.appendChild(item);
+      item.className = "history-item";
+      const title = document.createElement("span");
+      title.textContent = node.title || node.id;
+      const id = document.createElement("span");
+      id.textContent = node.id;
+      item.append(title, id);
+      this.historyListEl.appendChild(item);
+    });
+  }
+
+  renderSkills() {
+    if (!this.skillsListEl) return;
+    this.skillsListEl.innerHTML = "";
+
+    const stats = Object.entries(this.engine.player.stats);
+    const flags = Object.entries(this.engine.player.flags || {});
+
+    if (!stats.length && !flags.length) {
+      const empty = document.createElement("li");
+      empty.className = "empty-state";
+      empty.textContent = "Навыки появятся по мере прохождения истории.";
+      this.skillsListEl.appendChild(empty);
+      return;
+    }
+
+    stats.forEach(([stat, value]) => {
+      const card = document.createElement("li");
+      card.className = "skill-card";
+      const header = document.createElement("header");
+      const name = document.createElement("span");
+      name.textContent = stat;
+      const badge = document.createElement("span");
+      badge.className = "skill-badge";
+      badge.textContent = this.describeStatLevel(Number(value));
+      header.append(name, badge);
+      const description = document.createElement("p");
+      description.textContent = `Текущее значение: ${value}`;
+      card.append(header, description);
+      this.skillsListEl.appendChild(card);
     });
 
-    this.inventoryListEl.innerHTML = "";
-    if (!this.engine.player.inventory.length) {
-      const empty = document.createElement("li");
-      empty.className = "stat-item";
-      empty.textContent = "Пусто";
-      this.inventoryListEl.appendChild(empty);
-    } else {
-      this.engine.player.inventory.forEach((itemName) => {
-        const li = document.createElement("li");
-        li.textContent = itemName;
-        this.inventoryListEl.appendChild(li);
+    flags
+      .filter(([, value]) => value)
+      .forEach(([flag]) => {
+        const card = document.createElement("li");
+        card.className = "skill-card";
+        const header = document.createElement("header");
+        const name = document.createElement("span");
+        name.textContent = flag;
+        const badge = document.createElement("span");
+        badge.className = "skill-badge";
+        badge.textContent = "Активно";
+        header.append(name, badge);
+        const description = document.createElement("p");
+        description.textContent = "Специальное условие истории активно.";
+        card.append(header, description);
+        this.skillsListEl.appendChild(card);
       });
-    }
+  }
+
+  describeStatLevel(value) {
+    if (value >= 5) return "Легендарно";
+    if (value >= 3) return "Опытно";
+    if (value >= 1) return "Новичок";
+    return "Слабый";
   }
 }
 
@@ -208,18 +400,42 @@ class AdminPanel {
     this.exportBtn = document.getElementById("export-story");
     this.importInput = document.getElementById("import-story");
     this.resetBtn = document.getElementById("reset-story");
+    this.sceneList = document.getElementById("scene-list");
+    this.sceneFilter = document.getElementById("scene-filter");
+    this.sceneCount = document.getElementById("scene-count");
+    this.activeNodeId = null;
 
     this.bindEvents();
+    this.renderSceneList();
   }
 
   bindEvents() {
     this.showAdminBtn.addEventListener("click", () => {
-      this.panel.classList.toggle("hidden");
+      const shouldShow = this.panel.classList.contains("hidden");
+      this.setAdminVisibility(shouldShow);
     });
 
     this.toggleBtn.addEventListener("click", () => {
-      this.panel.classList.add("hidden");
+      this.setAdminVisibility(false);
     });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        this.setAdminVisibility(false);
+      }
+    });
+
+    if (this.sceneFilter) {
+      this.sceneFilter.addEventListener("input", () => this.renderSceneList());
+    }
+
+    if (this.sceneList) {
+      this.sceneList.addEventListener("click", (event) => {
+        const button = event.target.closest("[data-node]");
+        if (!button) return;
+        this.loadNode(button.dataset.node);
+      });
+    }
 
     this.nodeForm.addEventListener("submit", (event) => {
       event.preventDefault();
@@ -246,6 +462,11 @@ class AdminPanel {
       this.engine.setStory(updatedStory);
       this.ui.render();
       this.nodeForm.reset();
+      this.setActiveNode(nodeId);
+      if (this.choiceForm?.elements?.fromNode) {
+        this.choiceForm.elements.fromNode.value = nodeId;
+      }
+      this.renderSceneList();
       ToastManager.global().show(`Сцена «${title}» сохранена`);
     });
 
@@ -298,6 +519,8 @@ class AdminPanel {
       this.engine.setStory(updatedStory);
       this.ui.render();
       this.choiceForm.reset();
+      this.setActiveNode(fromNode);
+      this.renderSceneList();
       ToastManager.global().show("Выбор добавлен");
     });
 
@@ -325,6 +548,7 @@ class AdminPanel {
           }
           this.engine.setStory(story);
           this.ui.render();
+          this.renderSceneList();
           ToastManager.global().show("История импортирована");
         })
         .catch((error) => {
@@ -340,8 +564,26 @@ class AdminPanel {
       const story = resetStoryData();
       this.engine.setStory(story);
       this.ui.render();
+      this.activeNodeId = null;
+      this.renderSceneList();
       ToastManager.global().show("История сброшена к версии по умолчанию");
     });
+  }
+
+  setAdminVisibility(visible) {
+    this.panel.classList.toggle("hidden", !visible);
+    this.panel.setAttribute("aria-hidden", String(!visible));
+    this.showAdminBtn.setAttribute("aria-expanded", String(visible));
+    if (visible) {
+      this.renderSceneList();
+      if (this.sceneFilter && !this.sceneFilter.value) {
+        try {
+          this.sceneFilter.focus({ preventScroll: true });
+        } catch (error) {
+          this.sceneFilter.focus();
+        }
+      }
+    }
   }
 
   parseStatChanges(input) {
@@ -356,6 +598,122 @@ class AdminPanel {
       }
       return acc;
     }, {});
+  }
+
+  renderSceneList() {
+    if (!this.sceneList) return;
+    const filter = (this.sceneFilter?.value || "").trim().toLowerCase();
+    const nodes = Object.values(this.engine.story.nodes || {});
+    nodes.sort((a, b) => {
+      const aTitle = (a.title || a.id || "").toLowerCase();
+      const bTitle = (b.title || b.id || "").toLowerCase();
+      return aTitle.localeCompare(bTitle, "ru");
+    });
+
+    const fragment = document.createDocumentFragment();
+    let count = 0;
+
+    nodes.forEach((node) => {
+      const searchable = `${node.title || ""} ${node.id}`.toLowerCase();
+      if (filter && !searchable.includes(filter)) {
+        return;
+      }
+      count += 1;
+
+      const item = document.createElement("li");
+      item.className = "scene-list-item";
+
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "scene-list-button";
+      button.dataset.node = node.id;
+      if (node.id === this.activeNodeId) {
+        button.classList.add("is-active");
+      }
+
+      const title = document.createElement("span");
+      title.className = "scene-list-title";
+      title.textContent = node.title || "Без названия";
+
+      const meta = document.createElement("div");
+      meta.className = "scene-list-meta";
+      const idTag = document.createElement("span");
+      idTag.textContent = `ID: ${node.id}`;
+      const optionsTag = document.createElement("span");
+      const optionTotal = node.options?.length ?? 0;
+      optionsTag.textContent = this.formatChoiceCount(optionTotal);
+      meta.append(idTag, optionsTag);
+      if (this.engine.isEnding(node)) {
+        const badge = document.createElement("span");
+        badge.className = "scene-badge";
+        badge.textContent = "Финал";
+        meta.appendChild(badge);
+      }
+
+      if (node.text) {
+        const summary = document.createElement("span");
+        summary.className = "scene-list-summary";
+        const trimmed = node.text.length > 96 ? `${node.text.slice(0, 93)}…` : node.text;
+        summary.textContent = trimmed;
+        meta.appendChild(summary);
+      }
+
+      button.append(title, meta);
+      item.appendChild(button);
+      fragment.appendChild(item);
+    });
+
+    this.sceneList.innerHTML = "";
+    if (!count) {
+      const empty = document.createElement("li");
+      empty.className = "scene-empty";
+      empty.textContent = filter
+        ? "Сцены по запросу не найдены."
+        : "Добавьте первую сцену, чтобы начать историю.";
+      this.sceneList.appendChild(empty);
+    } else {
+      this.sceneList.appendChild(fragment);
+      this.setActiveNode(this.activeNodeId);
+    }
+
+    if (this.sceneCount) {
+      this.sceneCount.textContent = String(count);
+    }
+  }
+
+  loadNode(nodeId) {
+    const node = this.engine.getNode(nodeId);
+    if (!node) {
+      ToastManager.global().show(`Сцена ${nodeId} не найдена`, "warning");
+      return;
+    }
+
+    this.activeNodeId = nodeId;
+    if (this.nodeForm) {
+      this.nodeForm.elements.nodeId.value = node.id;
+      this.nodeForm.elements.title.value = node.title || "";
+      this.nodeForm.elements.description.value = node.text || "";
+    }
+    if (this.choiceForm?.elements?.fromNode) {
+      this.choiceForm.elements.fromNode.value = node.id;
+    }
+    this.setActiveNode(nodeId);
+  }
+
+  setActiveNode(nodeId) {
+    this.activeNodeId = nodeId;
+    if (!this.sceneList) return;
+    this.sceneList
+      .querySelectorAll(".scene-list-button")
+      .forEach((button) => {
+        button.classList.toggle("is-active", button.dataset.node === nodeId);
+      });
+  }
+
+  formatChoiceCount(count) {
+    if (count === 1) return "1 выбор";
+    if (count > 1 && count < 5) return `${count} выбора`;
+    return `${count} выборов`;
   }
 }
 
