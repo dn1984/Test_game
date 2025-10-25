@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mystical Journeys</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&amp;family=Merriweather:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#5211d4",
+              "background-light": "#f6f6f8",
+              "background-dark": "#161022",
+              "accent-cyan": "#66FCF1",
+              "accent-gold": "#FFD700",
+              "accent-magenta": "#EE82EE"
+            },
+            fontFamily: {
+              "display": ["Space Grotesk", "sans-serif"],
+              "body": ["Merriweather", "serif"]
+            },
+            borderRadius: {
+              "DEFAULT": "0.25rem",
+              "lg": "0.5rem",
+              "xl": "0.75rem",
+              "full": "9999px"
+            },
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+      }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-body">
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-background-light dark:bg-background-dark group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<div class="flex flex-1 justify-center p-4 sm:p-6 md:p-8">
+<div class="layout-content-container flex flex-col max-w-4xl flex-1 w-full gap-4">
+<!-- Character Stats Panel -->
+<div class="absolute top-4 left-4 sm:top-6 sm:left-6 z-10">
+<div class="flex flex-col gap-4 bg-black/30 backdrop-blur-sm border border-white/10 rounded-xl p-4 w-64">
+<div class="flex items-center gap-4">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-14 w-14 border-2 border-primary" data-alt="Character avatar showing a cloaked mage." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD4P4B9s2hICxqmYUp_JNtcCJFeGNxXBA78RcMQjygZ_FEJ6Fw0czlPqOHe-NcR7rCiZv5WboUxlMsTBfo_HuCuv40KFrejEJod_9Vdi2kBdr1OHODKijWs-TkGCLh-Sg7uMlG_axhOO3yxf39rMbXH39CiZIkZKiVHvZ883FlnZ5lTofM4oB_hb7ue6PiXnofM5X2-y0_VZkd4eciDejqjxD3fKfG8PDW8Enlrgaq_Rwrpsi8QOrUzC7Y1p-LPz08J3MMNYbDchuMv");'></div>
+<div class="flex flex-col justify-center">
+<p class="text-white text-lg font-bold font-display leading-tight line-clamp-1">Elara</p>
+<p class="text-gray-300 text-sm font-normal leading-normal line-clamp-2">Level 5 Sorceress</p>
+</div>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Health -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-accent-cyan text-base">favorite</span>
+<p class="text-white text-sm font-medium font-display leading-normal">Health</p>
+</div>
+<p class="text-gray-300 text-xs font-medium font-display leading-normal">100 / 100</p>
+</div>
+<div class="w-full overflow-hidden rounded-full bg-primary/20 h-2"><div class="h-full rounded-full bg-accent-cyan" style="width: 100%;"></div></div>
+</div>
+<!-- Mana -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-accent-magenta text-base">auto_awesome</span>
+<p class="text-white text-sm font-medium font-display leading-normal">Mana</p>
+</div>
+<p class="text-gray-300 text-xs font-medium font-display leading-normal">80 / 100</p>
+</div>
+<div class="w-full overflow-hidden rounded-full bg-primary/20 h-2"><div class="h-full rounded-full bg-accent-magenta" style="width: 80%;"></div></div>
+</div>
+<!-- Energy -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-accent-gold text-base">bolt</span>
+<p class="text-white text-sm font-medium font-display leading-normal">Energy</p>
+</div>
+<p class="text-gray-300 text-xs font-medium font-display leading-normal">95 / 100</p>
+</div>
+<div class="w-full overflow-hidden rounded-full bg-primary/20 h-2"><div class="h-full rounded-full bg-accent-gold" style="width: 95%;"></div></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Scene -->
+<main class="flex flex-col justify-end flex-1 w-full gap-0 @container">
+<!-- Scene Illustration -->
+<div class="w-full bg-center bg-no-repeat bg-cover flex flex-col justify-end overflow-hidden min-h-[50vh] sm:min-h-[60vh] rounded-xl shadow-2xl shadow-primary/20" data-alt="An enchanted, dark forest with two divergent paths, one with a faint, magical glow and the other leading into deeper shadows." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD4O4d5f4g0CcfQDDlVnW3-Wn-yka42ox1iaXdtwB8iKpxtBRefe4syFZBdj1l1IK_zZCavow9nS8n-Mj5ZxlSHLCHRoJ_57vWxtGLl59nwbnN8o4wUGgRzVPOgJdxXjQb6Mlyn4jlROhuyujN9D5iRdKyqIA61wna0rvUX86xchg1d4cyQMMFdsuMjD5606E6RDzSJS9m8kyD9Jn8WOr6lBJXGKaFsSpuLSbwLDHr2Ma-UZOSxIWfUzWXyjoDf0QrkAq4Txu08hFCv");'>
+<div class="p-6 md:p-8 bg-gradient-to-t from-black/80 via-black/50 to-transparent">
+<!-- Scene Description -->
+<div class="bg-black/50 backdrop-blur-md p-6 rounded-lg border border-white/10">
+<p class="text-gray-200 text-base md:text-lg font-normal leading-relaxed">The air in the ancient forest is thick with an otherworldly silence, broken only by the faint hum of magic. Before you, a twisted path splits into two. To your left, a strange, ethereal light pulses from behind a thicket of thorns. To your right, the path descends into a shadowy grove where you hear a faint whisper on the wind.</p>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex justify-center mt-6">
+<div class="flex w-full gap-4 max-w-2xl flex-col items-stretch sm:flex-row">
+<button class="flex-1 flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-14 px-5 bg-primary text-white text-base font-bold font-display leading-normal tracking-wide transition-all hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30">
+<span class="truncate">Investigate the glow</span>
+</button>
+<button class="flex-1 flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-14 px-5 bg-primary text-white text-base font-bold font-display leading-normal tracking-wide transition-all hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30">
+<span class="truncate">Follow the whisper</span>
+</button>
+<button class="flex-1 flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-14 px-5 bg-[#2f2348] text-gray-300 text-base font-bold font-display leading-normal tracking-wide transition-all hover:bg-[#443267]">
+<span class="truncate">Check your inventory</span>
+</button>
+</div>
+</div>
+</main>
+</div>
+</div>
+</div>
+</div>
+</body></html>

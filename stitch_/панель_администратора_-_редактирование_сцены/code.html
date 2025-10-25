@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ru"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Редактор Сцены - Mystical Journeys</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#6B46C1",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#1A202C",
+                        "surface-dark": "#2D3748",
+                        "border-dark": "#4A5568",
+                        "text-light": "#E2E8F0",
+                        "text-muted": "#A0AEC0",
+                        "danger": "#C53030"
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings:
+                'FILL' 0,
+                'wght' 400,
+                'GRAD' 0,
+                'opsz' 24
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="relative flex min-h-screen w-full">
+<!-- SideNavBar -->
+<aside class="flex h-screen flex-col justify-between border-r border-border-dark bg-surface-dark/20 p-4 sticky top-0">
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="Логотип игры Mystical Journeys" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDlms-YKSDs6rWv8SXqkINjGPKMag4mfDe5OOyLwyM5zXiwV8wWL3HUBZjAsJAp25nwJoTYvPxP_oA0EKrKzsiy7O4Z8aj3KdEH0VJ--ffebE2YChSJYC2-K5j1YnGnplRHVJ3-P8TFiECm3yVq4BXJwU3yYmrAyX3S3qN3oLANpz6VJTM5L08yaP082iBBaKE1rZA0NsLkt2VXnw6Kn_3josayOKVCPA0uK1phAIRwGgaRnrxZ5srjXI5KRbPnxNmhJ0av86veDvNf");'></div>
+<div class="flex flex-col">
+<h1 class="text-text-light text-base font-medium leading-normal">Admin Panel</h1>
+<p class="text-text-muted text-sm font-normal leading-normal">Mystical Journeys</p>
+</div>
+</div>
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2 text-text-light hover:bg-primary/20 rounded-lg" href="#">
+<span class="material-symbols-outlined text-text-light">dashboard</span>
+<p class="text-sm font-medium leading-normal">Dashboard</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary text-white" href="#">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1">movie</span>
+<p class="text-sm font-medium leading-normal">Scenes</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-text-light hover:bg-primary/20 rounded-lg" href="#">
+<span class="material-symbols-outlined text-text-light">person</span>
+<p class="text-sm font-medium leading-normal">Characters</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-text-light hover:bg-primary/20 rounded-lg" href="#">
+<span class="material-symbols-outlined text-text-light">sell</span>
+<p class="text-sm font-medium leading-normal">Items</p>
+</a>
+</nav>
+</div>
+<div class="flex flex-col gap-4">
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-wide hover:bg-primary/90 transition-colors">
+<span class="truncate">View Game</span>
+</button>
+<div class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 text-text-light hover:bg-primary/20 rounded-lg" href="#">
+<span class="material-symbols-outlined text-text-light">settings</span>
+<p class="text-sm font-medium leading-normal">Settings</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-text-light hover:bg-primary/20 rounded-lg" href="#">
+<span class="material-symbols-outlined text-text-light">logout</span>
+<p class="text-sm font-medium leading-normal">Logout</p>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 p-8">
+<div class="mx-auto max-w-7xl">
+<!-- PageHeading -->
+<header class="flex flex-wrap items-center justify-between gap-4 mb-8">
+<div class="flex min-w-72 flex-col gap-2">
+<h1 class="text-text-light text-4xl font-black leading-tight tracking-[-0.033em]">Редактор Сцены</h1>
+<p class="text-text-muted text-base font-normal leading-normal">Создание или редактирование деталей для конкретной сцены.</p>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-text-muted text-sm italic">Сохранено</span>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-5 bg-primary text-white text-sm font-bold leading-normal tracking-wide hover:bg-primary/90 transition-colors">
+<span class="truncate">Сохранить</span>
+</button>
+</div>
+</header>
+<!-- Two-column Layout for Editor -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Left Column: Primary Scene Details -->
+<div class="lg:col-span-1 flex flex-col gap-6">
+<div class="bg-surface-dark rounded-xl border border-border-dark p-6">
+<h2 class="text-text-light text-xl font-bold leading-tight tracking-[-0.015em] mb-4">Детали Сцены</h2>
+<div class="flex flex-col gap-4">
+<!-- Scene ID Field (Read-only) -->
+<label class="flex flex-col w-full">
+<p class="text-text-light text-sm font-medium leading-normal pb-2">Scene ID</p>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-text-light focus:outline-0 focus:ring-2 focus:ring-primary border border-border-dark bg-background-dark h-12 placeholder:text-text-muted px-4 text-base font-normal leading-normal cursor-not-allowed" readonly="" value="scene_001"/>
+</label>
+<!-- Scene Title Field -->
+<label class="flex flex-col w-full">
+<p class="text-text-light text-sm font-medium leading-normal pb-2">Название Сцены</p>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-text-light focus:outline-0 focus:ring-2 focus:ring-primary border border-border-dark bg-background-dark h-12 placeholder:text-text-muted px-4 text-base font-normal leading-normal" value="Таинственный лес"/>
+</label>
+<!-- Scene Description Field -->
+<label class="flex flex-col w-full">
+<p class="text-text-light text-sm font-medium leading-normal pb-2">Описание Сцены</p>
+<textarea class="form-textarea flex w-full min-w-0 flex-1 resize-y overflow-hidden rounded-lg text-text-light focus:outline-0 focus:ring-2 focus:ring-primary border border-border-dark bg-background-dark h-48 placeholder:text-text-muted p-4 text-base font-normal leading-normal" placeholder="Опишите окружение, события и персонажей в этой сцене...">Вы входите в густую чащу таинственного леса. Древние деревья возвышаются над вами, их ветви переплетаются, создавая почти непроницаемый навес. Впереди вы видите развилку...</textarea>
+</label>
+</div>
+</div>
+<div class="bg-surface-dark rounded-xl border border-border-dark p-6">
+<h2 class="text-text-light text-xl font-bold leading-tight tracking-[-0.015em] mb-4">Фоновое Изображение</h2>
+<div class="flex flex-col items-center justify-center w-full gap-4">
+<div class="aspect-video w-full rounded-lg bg-background-dark border-2 border-dashed border-border-dark flex items-center justify-center">
+<div class="bg-center bg-no-repeat w-full h-full bg-cover rounded-md" data-alt="Изображение таинственного леса" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCyV7CdxlhQuQNowHePGJTIggirL5xQF2qgG27wZ298sGI5ZZ8iwfdX0-ABjc7Ol7sG1jxDOTe8WlF6vmUg_J8AMIws8EEfT6OmaW2et-3HayV7NQ2RyraGmOph0klZ4ee1lNEsF7Sjm9lErFAAnKALpqnUkW8oR5Z_BQU_ab7dMTH9K89S_d-LteYRYq1zgGAtPQzfq_OCtZ3uQ_FR9u6x3MY1ACnI_1Trrq26YJ1QHyq6-eetcDtrwu08_GgF2HcQHF-AmZvMCgl2");'></div>
+</div>
+<button class="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-border-dark text-text-light text-sm font-bold leading-normal tracking-wide hover:bg-border-dark/80 transition-colors">
+<span class="truncate">Загрузить новое изображение</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Right Column: Scene Choices -->
+<div class="lg:col-span-2 flex flex-col gap-6">
+<div class="flex justify-between items-center">
+<h2 class="text-text-light text-xl font-bold leading-tight tracking-[-0.015em]">Варианты Действий</h2>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg h-10 px-4 bg-surface-dark border border-border-dark text-text-light text-sm font-bold leading-normal tracking-wide hover:bg-border-dark transition-colors">
+<span class="material-symbols-outlined text-base">add</span>
+<span class="truncate">Добавить вариант</span>
+</button>
+</div>
+<div class="flex flex-col gap-4">
+<!-- Action Card 1 -->
+<div class="bg-surface-dark rounded-xl border border-border-dark p-4">
+<div class="flex items-start gap-4">
+<button class="text-text-muted hover:text-text-light cursor-grab pt-4">
+<span class="material-symbols-outlined">drag_indicator</span>
+</button>
+<div class="flex-1 flex flex-col gap-4">
+<label class="flex flex-col w-full">
+<p class="text-text-light text-sm font-medium leading-normal pb-2">Текст действия</p>
+<input class="form-input flex w-full rounded-lg text-text-light focus:outline-0 focus:ring-2 focus:ring-primary border border-border-dark bg-background-dark h-12 px-4" value="Пойти по тропинке налево"/>
+</label>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<label class="flex flex-col w-full">
+<p class="text-text-light text-sm font-medium leading-normal pb-2">ID следующей сцены</p>
+<input class="form-input flex w-full rounded-lg text-text-light focus:outline-0 focus:ring-2 focus:ring-primary border border-border-dark bg-background-dark h-12 px-4" value="scene_002"/>
+</label>
+<label class="flex flex-col w-full">
+<p class="text-text-light text-sm font-medium leading-normal pb-2">Изменение статов (опционально)</p>
+<input class="form-input flex w-full rounded-lg text-text-light focus:outline-0 focus:ring-2 focus:ring-primary border border-border-dark bg-background-dark h-12 px-4" placeholder="+10 Magic, -5 Health"/>
+</label>
+</div>
+</div>
+<button class="text-text-muted hover:text-danger pt-3">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+<!-- Action Card 2 -->
+<div class="bg-surface-dark rounded-xl border border-border-dark p-4">
+<div class="flex items-start gap-4">
+<button class="text-text-muted hover:text-text-light cursor-grab pt-4">
+<span class="material-symbols-outlined">drag_indicator</span>
+</button>
+<div class="flex-1 flex flex-col gap-4">
+<label class="flex flex-col w-full">
+<p class="text-text-light text-sm font-medium leading-normal pb-2">Текст действия</p>
+<input class="form-input flex w-full rounded-lg text-text-light focus:outline-0 focus:ring-2 focus:ring-primary border border-border-dark bg-background-dark h-12 px-4" value="Осмотреть старый дуб"/>
+</label>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<label class="flex flex-col w-full">
+<p class="text-text-light text-sm font-medium leading-normal pb-2">ID следующей сцены</p>
+<input class="form-input flex w-full rounded-lg text-text-light focus:outline-0 focus:ring-2 focus:ring-primary border border-border-dark bg-background-dark h-12 px-4" value="scene_003"/>
+</label>
+<label class="flex flex-col w-full">
+<p class="text-text-light text-sm font-medium leading-normal pb-2">Изменение статов (опционально)</p>
+<input class="form-input flex w-full rounded-lg text-text-light focus:outline-0 focus:ring-2 focus:ring-primary border border-border-dark bg-background-dark h-12 px-4" value="+5 Wisdom"/>
+</label>
+</div>
+</div>
+<button class="text-text-muted hover:text-danger pt-3">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+<!-- Action Card 3 (Empty for creation) -->
+<div class="bg-surface-dark rounded-xl border-2 border-dashed border-border-dark p-4 opacity-60">
+<div class="flex items-start gap-4">
+<div class="text-text-muted pt-4">
+<span class="material-symbols-outlined">add</span>
+</div>
+<div class="flex-1 flex flex-col gap-4">
+<label class="flex flex-col w-full">
+<p class="text-text-light text-sm font-medium leading-normal pb-2">Текст действия</p>
+<input class="form-input flex w-full rounded-lg text-text-light focus:outline-0 focus:ring-2 focus:ring-primary border border-border-dark bg-background-dark h-12 px-4" placeholder="Например: Попытаться взобраться на дерево"/>
+</label>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<label class="flex flex-col w-full">
+<p class="text-text-light text-sm font-medium leading-normal pb-2">ID следующей сцены</p>
+<input class="form-input flex w-full rounded-lg text-text-light focus:outline-0 focus:ring-2 focus:ring-primary border border-border-dark bg-background-dark h-12 px-4" placeholder="scene_004"/>
+</label>
+<label class="flex flex-col w-full">
+<p class="text-text-light text-sm font-medium leading-normal pb-2">Изменение статов (опционально)</p>
+<input class="form-input flex w-full rounded-lg text-text-light focus:outline-0 focus:ring-2 focus:ring-primary border border-border-dark bg-background-dark h-12 px-4" placeholder="+2 Strength"/>
+</label>
+</div>
+</div>
+<div class="w-6 h-6 pt-3"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

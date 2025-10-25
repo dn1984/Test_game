@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ru"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Управление сценами - Mystical Journeys</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5211d4",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#161022",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings:
+                'FILL' 0,
+                'wght' 400,
+                'GRAD' 0,
+                'opsz' 24
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
+<div class="flex min-h-screen">
+<!-- SideNavBar -->
+<aside class="flex h-screen flex-col justify-between bg-[#f0f2f5] dark:bg-[#1C162D] p-4 w-64 border-r border-gray-200 dark:border-[#2f2348]">
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="Mystical Journeys game logo" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBCP-YwBnlAaGfDbFjHiXr1KUCU1CnJZ-77buNylmqHEDuvTTZPMpZnqIKPGj2-yscAKcRtmdUA0brJbvTy_DiCtNZ0qVDbEI4SKJMu7yPXUMK3ZNLswQTI0njp4GrBdsAWXnHDRtcwQGyxAdYyxZFs1ClWBe1whksLRj10yzMlT0u_89cRb7j1mHC2yxOGbx49ljqepiWLE0IShg1eQoUAtbvEQvk8GYst7BFQXcd2d2In8iuQ6c0IgA182kkxbOkS23WJqW9dx2nj");'></div>
+<div class="flex flex-col">
+<h1 class="text-gray-900 dark:text-white text-base font-medium leading-normal">Mystical Journeys</h1>
+<p class="text-gray-500 dark:text-[#a492c9] text-sm font-normal leading-normal">Панель администратора</p>
+</div>
+</div>
+<nav class="flex flex-col gap-2 mt-4">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-[#2f2348] transition-colors" href="#">
+<span class="material-symbols-outlined text-gray-600 dark:text-white">dashboard</span>
+<p class="text-sm font-medium leading-normal">Dashboard</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/20 dark:bg-[#2f2348] text-primary dark:text-white" href="#">
+<span class="material-symbols-outlined">movie</span>
+<p class="text-sm font-medium leading-normal">Сцены</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-[#2f2348] transition-colors" href="#">
+<span class="material-symbols-outlined text-gray-600 dark:text-white">group</span>
+<p class="text-sm font-medium leading-normal">Персонажи</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-[#2f2348] transition-colors" href="#">
+<span class="material-symbols-outlined text-gray-600 dark:text-white">settings</span>
+<p class="text-sm font-medium leading-normal">Настройки</p>
+</a>
+</nav>
+</div>
+<div class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-[#2f2348] transition-colors" href="#">
+<span class="material-symbols-outlined text-gray-600 dark:text-white">help</span>
+<p class="text-sm font-medium leading-normal">Помощь</p>
+</a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 p-8 overflow-y-auto">
+<div class="max-w-7xl mx-auto">
+<!-- PageHeading -->
+<div class="flex flex-wrap justify-between items-center gap-4 mb-6">
+<div class="flex flex-col gap-2">
+<h1 class="text-gray-900 dark:text-white text-4xl font-black leading-tight tracking-[-0.033em]">Управление сценами</h1>
+<p class="text-gray-500 dark:text-[#a492c9] text-base font-normal leading-normal">Добавляйте, редактируйте и удаляйте сцены для вашей игры.</p>
+</div>
+<button class="flex items-center justify-center gap-2 overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors">
+<span class="material-symbols-outlined">add_circle</span>
+<span class="truncate">Добавить новую сцену</span>
+</button>
+</div>
+<!-- SearchBar -->
+<div class="mb-6">
+<label class="flex flex-col min-w-40 h-12 w-full">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full bg-white dark:bg-[#2f2348] border border-gray-200 dark:border-transparent focus-within:ring-2 focus-within:ring-primary">
+<div class="text-gray-400 dark:text-[#a492c9] flex items-center justify-center pl-4">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-gray-900 dark:text-white focus:outline-0 focus:ring-0 border-none bg-transparent h-full placeholder:text-gray-400 dark:placeholder:text-[#a492c9] px-4 pl-2 text-base font-normal leading-normal" placeholder="Найти сцену по названию..." value=""/>
+</div>
+</label>
+</div>
+<!-- Table -->
+<div class="overflow-hidden rounded-lg border border-gray-200 dark:border-[#443267] bg-white dark:bg-[#1C162D]">
+<div class="overflow-x-auto">
+<table class="w-full">
+<thead class="bg-gray-50 dark:bg-[#221933]">
+<tr>
+<th class="px-6 py-4 text-left text-xs font-medium text-gray-500 dark:text-white uppercase tracking-wider w-2/5">Название сцены</th>
+<th class="px-6 py-4 text-left text-xs font-medium text-gray-500 dark:text-white uppercase tracking-wider">Дата создания</th>
+<th class="px-6 py-4 text-left text-xs font-medium text-gray-500 dark:text-white uppercase tracking-wider">Последнее изменение</th>
+<th class="px-6 py-4 text-left text-xs font-medium text-gray-500 dark:text-white uppercase tracking-wider">Действия</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-200 dark:divide-[#443267]">
+<tr class="hover:bg-gray-50 dark:hover:bg-[#221933] transition-colors">
+<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">Начало в таверне</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-[#a492c9]">2023-10-26</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-[#a492c9]">2023-10-27</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+<div class="flex items-center gap-4">
+<a class="text-primary dark:text-indigo-400 hover:text-primary/80 dark:hover:text-indigo-300 flex items-center gap-1" href="#"><span class="material-symbols-outlined text-base">edit</span>Редактировать</a>
+<a class="text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300 flex items-center gap-1" href="#"><span class="material-symbols-outlined text-base">delete</span>Удалить</a>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-[#221933] transition-colors">
+<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">Встреча с загадочным стариком</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-[#a492c9]">2023-10-25</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-[#a492c9]">2023-10-25</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+<div class="flex items-center gap-4">
+<a class="text-primary dark:text-indigo-400 hover:text-primary/80 dark:hover:text-indigo-300 flex items-center gap-1" href="#"><span class="material-symbols-outlined text-base">edit</span>Редактировать</a>
+<a class="text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300 flex items-center gap-1" href="#"><span class="material-symbols-outlined text-base">delete</span>Удалить</a>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-[#221933] transition-colors">
+<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">Путь через темный лес</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-[#a492c9]">2023-10-24</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-[#a492c9]">2023-10-26</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+<div class="flex items-center gap-4">
+<a class="text-primary dark:text-indigo-400 hover:text-primary/80 dark:hover:text-indigo-300 flex items-center gap-1" href="#"><span class="material-symbols-outlined text-base">edit</span>Редактировать</a>
+<a class="text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300 flex items-center gap-1" href="#"><span class="material-symbols-outlined text-base">delete</span>Удалить</a>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-[#221933] transition-colors">
+<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">Битва у заброшенного замка</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-[#a492c9]">2023-10-22</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-[#a492c9]">2023-10-23</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+<div class="flex items-center gap-4">
+<a class="text-primary dark:text-indigo-400 hover:text-primary/80 dark:hover:text-indigo-300 flex items-center gap-1" href="#"><span class="material-symbols-outlined text-base">edit</span>Редактировать</a>
+<a class="text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300 flex items-center gap-1" href="#"><span class="material-symbols-outlined text-base">delete</span>Удалить</a>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-[#221933] transition-colors">
+<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">Королевский прием</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-[#a492c9]">2023-10-20</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-[#a492c9]">2023-10-21</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+<div class="flex items-center gap-4">
+<a class="text-primary dark:text-indigo-400 hover:text-primary/80 dark:hover:text-indigo-300 flex items-center gap-1" href="#"><span class="material-symbols-outlined text-base">edit</span>Редактировать</a>
+<a class="text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300 flex items-center gap-1" href="#"><span class="material-symbols-outlined text-base">delete</span>Удалить</a>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Pagination -->
+<div class="flex items-center justify-center py-6 mt-2">
+<a class="flex size-10 items-center justify-center text-gray-500 dark:text-white hover:bg-gray-200 dark:hover:bg-[#2f2348] rounded-full transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">chevron_left</span>
+</a>
+<a class="text-sm font-bold leading-normal tracking-[0.015em] flex size-10 items-center justify-center text-white rounded-full bg-primary" href="#">1</a>
+<a class="text-sm font-normal leading-normal flex size-10 items-center justify-center text-gray-600 dark:text-white rounded-full hover:bg-gray-200 dark:hover:bg-[#2f2348] transition-colors" href="#">2</a>
+<a class="text-sm font-normal leading-normal flex size-10 items-center justify-center text-gray-600 dark:text-white rounded-full hover:bg-gray-200 dark:hover:bg-[#2f2348] transition-colors" href="#">3</a>
+<span class="text-sm font-normal leading-normal flex size-10 items-center justify-center text-gray-600 dark:text-white rounded-full" href="#">...</span>
+<a class="text-sm font-normal leading-normal flex size-10 items-center justify-center text-gray-600 dark:text-white rounded-full hover:bg-gray-200 dark:hover:bg-[#2f2348] transition-colors" href="#">10</a>
+<a class="flex size-10 items-center justify-center text-gray-500 dark:text-white hover:bg-gray-200 dark:hover:bg-[#2f2348] rounded-full transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">chevron_right</span>
+</a>
+</div>
+</div>
+</main>
+</div>
+</body></html>

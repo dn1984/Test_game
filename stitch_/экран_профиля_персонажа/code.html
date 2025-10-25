@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ru"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Character Sheet - Mystical Journeys</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5211d4",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#161022",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #161022;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="relative flex min-h-screen w-full flex-col p-4 sm:p-6 md:p-8">
+<div class="layout-container mx-auto flex h-full max-w-7xl grow flex-col">
+<div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
+<!-- Left Column: Character Identity -->
+<div class="lg:col-span-1">
+<div class="flex h-full w-full flex-col items-center rounded-xl bg-[#231a39] p-6 text-center shadow-lg">
+<div class="flex flex-col items-center gap-4">
+<div class="bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-lg w-48 shadow-md" data-alt="Portrait of Elara Nightshade, a female mage with glowing eyes." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBS-2zTi6YKozntkzDA0WbRrEtcamkQp0_r9Jp2ZXZtlcn3DMCNjnxUqcmEt6y-HpC07gCcbA587KEdOd-v8J9LnH9EgBwfn3G_0c4cChpX1iYbJv-eQ2QY8-iACg1gjKCcZAE5XC4CpienxOJFYXjanrGUAhyTY6KAydlWttf40eXKjW86BmcnLQVxTAgSRdwZWzKMXrnpQXxAPraMnewPPopXbG61YS7GRs8S6vMrepQnmqVyWiVkgu8XbNnFvLi3ogYDPC_3akAd");'></div>
+<div class="flex flex-col items-center justify-center">
+<p class="text-white text-2xl font-bold leading-tight tracking-[-0.015em]">Элара Ночная Тень</p>
+<p class="text-[#a492c9] text-base font-normal leading-normal">Начинающий Маг</p>
+</div>
+</div>
+<button class="mt-6 flex w-full max-w-xs cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] transition-colors hover:bg-primary/80">
+<span class="truncate">Поделиться</span>
+</button>
+</div>
+</div>
+<!-- Right Column: Character Details -->
+<div class="lg:col-span-2">
+<div class="flex flex-col gap-8">
+<!-- Characteristics/Stats Section -->
+<div class="rounded-xl bg-[#231a39] p-6 shadow-lg">
+<h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3">Характеристики</h2>
+<div class="p-4">
+<div class="flex justify-between gap-x-6 py-3 border-b border-white/10">
+<p class="text-[#a492c9] text-sm font-normal leading-normal">Сила</p>
+<p class="text-white text-sm font-bold leading-normal text-right">12</p>
+</div>
+<div class="flex justify-between gap-x-6 py-3 border-b border-white/10">
+<p class="text-[#a492c9] text-sm font-normal leading-normal">Ловкость</p>
+<p class="text-white text-sm font-bold leading-normal text-right">18</p>
+</div>
+<div class="flex justify-between gap-x-6 py-3 border-b border-white/10">
+<p class="text-[#a492c9] text-sm font-normal leading-normal">Интеллект</p>
+<p class="text-white text-sm font-bold leading-normal text-right">25</p>
+</div>
+<div class="flex justify-between gap-x-6 py-3 border-b border-white/10">
+<p class="text-[#a492c9] text-sm font-normal leading-normal">Выносливость</p>
+<p class="text-white text-sm font-bold leading-normal text-right">15</p>
+</div>
+<div class="flex justify-between gap-x-6 py-3 border-b border-white/10">
+<p class="text-[#a492c9] text-sm font-normal leading-normal">Харизма</p>
+<p class="text-white text-sm font-bold leading-normal text-right">16</p>
+</div>
+<div class="flex justify-between gap-x-6 py-3">
+<p class="text-[#a492c9] text-sm font-normal leading-normal">Мудрость</p>
+<p class="text-white text-sm font-bold leading-normal text-right">22</p>
+</div>
+</div>
+</div>
+<!-- Inventory Section -->
+<div class="rounded-xl bg-[#231a39] p-6 shadow-lg">
+<h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3">Инвентарь</h2>
+<div class="grid grid-cols-[repeat(auto-fill,minmax(100px,1fr))] gap-4 p-4">
+<div class="group relative flex flex-col gap-3">
+<div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg border-2 border-transparent bg-[#161022] transition-all group-hover:border-primary" data-alt="A glowing blue potion of healing in a glass vial." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDgqGlKRQqPUAL_adm3JnP_CG1LKIYhHujdb8xyZbdDxkcQZ4FG0DC_FUXVtiHofptmfZuVLmqNHCtSUzw32RzebFAKdCbCq-ABuhoB7OtdlcURnJ9Rcwe6J8nI4hxwXqOGoAZBBl9WyH6ukfmsrvMSRnZ3BPZV5bUeLOaUStNRUGsaVLaQb5M5CCg8EhqvQV3lwrxCEMALJ553YaDLvc8KajUWXWmHPnaMyrHP7vb-OVVw7s2oAtul_uDjlt50xrk-Hzx5b0Z0KjAr");'></div>
+</div>
+<div class="group relative flex flex-col gap-3">
+<div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg border-2 border-transparent bg-[#161022] transition-all group-hover:border-primary" data-alt="An ancient scroll tied with a red ribbon." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDaWVcaNKwQdRR8jbk3WxX5alE0Y9TH3o7sCmLzhCideddsDOM0GSUZVCW-mLMj637geiAXgHJaZA-B44-mjBtn1sWlEb3PfaBw0R-v8nWADDO83Ij5KDSCAP5VPiV_W7yOEGkXlkUmfr-1M8jm9_B4nqJOKnuFnwCJc13am10oDhrORD_CykmFWGesNLiiXtkdJ7GrFdLakHpAcaBZlDFza1tUWTzsC3IIQDUqJmDQgP9heFB482UVvVFEx7sgK005Zmh7zk-D-krM");'></div>
+</div>
+<div class="group relative flex flex-col gap-3">
+<div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg border-2 border-transparent bg-[#161022] transition-all group-hover:border-primary" data-alt="A magical artifact, a glowing orb of light." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuALmxkitHKdmTFrmoU1rq5P-YnCm8ai1shvwlvFFHHx-NiBlWW2jGFdcdKuHlwIxH5Iptbc97O3jODipUxcSBS8_WZBD79wdd0VXPxsD5helnF5_maFS5Og_4Uz0XtHd_e-FEjnNcrgRF48QZ0lIL68nRIrsQ3Bqzb05ID9tIT0XDXep8HFmtrRhrRj9dkYEYJuyo1WGe6bS-KoVTUB4xt5ZsU9yrywoieMyc6DpVv8qe5NwATvsQSkxd3fbWGSzsS53s4bWVr47m5z");'></div>
+</div>
+<div class="group relative flex flex-col gap-3">
+<div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg border-2 border-transparent bg-[#161022] transition-all group-hover:border-primary" data-alt="A wizard's staff with a crystal on top." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDipYcDOMb8guDzqbTUkf8tQ6DtUTBwnCcFEwqlUp9w2ZW7IQD2XbSeJffkySzC4nLEFvM5WQoZvoLVEilFsyLDwr6X9uWxBEETC3POHjoDJmnyXF0AvGt8G2WUVo1TQCVjk6FP-uqnaZBYapq2tcIAUXUGEFpA-n7Zfx-re9XIpOZRcjuUZEKh6PEUA_HegaXiOw9ckLuSiWhqYAzfjUJK7QIKcxT3eI4-QpQvZhpB9l11lM-kqEnGMeoEktTd8Cev158BgMQ0O3A4");'></div>
+</div>
+<div class="group relative flex flex-col gap-3">
+<div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg border-2 border-transparent bg-[#161022] transition-all group-hover:border-primary" data-alt="A leather-bound spellbook with a gold clasp." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC2VA-vjt0y418NZw4iELVxIVK-bs5CYq8M6hGHHv1nVrmm20tA8L4ezMuLRA3fR4WiKnSfB1fffskTyOF208UM73Ky2LHmLH6XSJRqQIS5hy3-b5eCPytv-P9dTeXabO_X_SBgn6ZrnGoNx3-mX4ZBE6HACtg2huDUiKKu5JHydrcJL3jjw-ATTy6MmvImtdaQ9uXtr9W_HcR6YSfUykcvdcGVU_eJI5pebApGrboO_J1BSE21VXvY0OpS92ocngdeNZGmI94P2GNi");'></div>
+</div>
+<!-- Empty Slots -->
+<div class="group relative flex flex-col gap-3">
+<div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg border-2 border-dashed border-white/10 bg-[#161022] transition-all group-hover:border-primary/50 group-hover:bg-primary/10"></div>
+</div>
+<div class="group relative flex flex-col gap-3">
+<div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg border-2 border-dashed border-white/10 bg-[#161022] transition-all group-hover:border-primary/50 group-hover:bg-primary/10"></div>
+</div>
+<div class="group relative flex flex-col gap-3">
+<div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg border-2 border-dashed border-white/10 bg-[#161022] transition-all group-hover:border-primary/50 group-hover:bg-primary/10"></div>
+</div>
+<div class="group relative flex flex-col gap-3">
+<div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg border-2 border-dashed border-white/10 bg-[#161022] transition-all group-hover:border-primary/50 group-hover:bg-primary/10"></div>
+</div>
+<div class="group relative flex flex-col gap-3">
+<div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg border-2 border-dashed border-white/10 bg-[#161022] transition-all group-hover:border-primary/50 group-hover:bg-primary/10"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mystical Journeys - Character Selection</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5211d4",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#161022",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .group:hover .group-hover\:block {
+            display: block;
+        }
+        .group:hover .group-hover\:opacity-100 {
+            opacity: 1;
+        }
+        .group.selected .group-\[selected\]\:border-primary {
+             border-color: #5211d4;
+        }
+        .group.selected .group-\[selected\]\:ring-2 {
+            --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+            --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+            box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+        }
+        .group.selected .group-\[selected\]\:ring-primary {
+            --tw-ring-color: #5211d4;
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark">
+<div class="relative flex min-h-screen w-full flex-col items-center justify-center p-4 md:p-8">
+<!-- Background Image -->
+<div class="absolute inset-0 z-0 bg-cover bg-center opacity-20" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCRPpszKEzoCr7uZyK6w3cG1TOSLm8tcW0usY2jXym7qpPETjy746gm9Z0r_d7IO6pDVnA44HllD4dIK-Sm07eYVxJgqLgR5-nT9aN-VaerLDhI55ZZIWewJHdJMAFYrc2UVRbeN5J9KpmGt1SwV2UmTq-GZ3B0nRMgYfikkUYQ4U6_7DT-S1bkSwEPLuf5Mtk9CYnAa7nwLIhjLw61IpYl3maJnqXlKSxsm1h6cH7SgpcnNtRRw0B0p1At2mnvjGar1CV5e7oVETPa');"></div>
+<div class="absolute inset-0 z-0 bg-gradient-to-t from-background-dark via-background-dark/80 to-transparent"></div>
+<div class="relative z-10 flex w-full max-w-5xl flex-col items-center">
+<!-- Page Heading -->
+<div class="w-full text-center mb-8 md:mb-12">
+<h1 class="text-white text-4xl md:text-5xl font-black leading-tight tracking-[-0.033em] font-display">Choose Your Path</h1>
+<p class="text-[#a492c9] text-base md:text-lg font-normal leading-normal mt-2">Select a hero to begin your mystical journey through the enchanted lands.</p>
+</div>
+<!-- Character Cards Grid -->
+<div class="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+<!-- Character Card 1: The Shadow Ranger -->
+<div class="group relative cursor-pointer overflow-hidden rounded-xl border border-white/10 bg-white/5 p-1 backdrop-blur-sm transition-all duration-300 hover:border-primary/80 hover:ring-2 hover:ring-primary/50 group-[selected]:border-primary group-[selected]:ring-2 group-[selected]:ring-primary">
+<div class="relative aspect-[3/4] w-full overflow-hidden rounded-lg">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="A cloaked archer standing in a dark forest, holding a glowing bow." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD4lVE8zxXXiFbraRbYFFKIGVpnvnlF4QPduly66eEg-X6hNseif-EA1WMxgRMS_wS0dl5m0JMpLdnBbV90dJ6lIHdqheXujs7efV7wio4hH-OfDWvyTjamRhbn-mkqP_RkDIVzvqkM1aEpSvhP-eKOcM5pmMU8oRaRGmcWaX6LWfi_wV-_0-m6DTd7rgF4Id36moVfSj3JkTFbZiXb69MF-EO51RpqfoBvo2XTZNvMeoSbozG33sCuRaxbUOvTtqZXFjR2I7xfwYUT');"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+<div class="absolute bottom-0 left-0 w-full p-4">
+<h2 class="text-white text-2xl font-bold leading-tight">The Shadow Ranger</h2>
+</div>
+</div>
+<div class="absolute inset-0 top-auto z-10 flex h-full flex-col justify-end bg-background-dark/90 p-5 opacity-0 backdrop-blur-md transition-opacity duration-300 group-hover:opacity-100">
+<h3 class="text-white text-xl font-bold">The Shadow Ranger</h3>
+<p class="mt-2 text-sm text-[#a492c9]">A master of stealth and precision, moving unseen through the shadows to strike with unerring accuracy.</p>
+<div class="mt-4 space-y-2 text-white">
+<div class="flex items-center gap-3 text-sm">
+<span class="material-symbols-outlined text-primary text-xl">directions_run</span>
+<span class="w-20">Agility</span>
+<div class="h-1.5 w-full flex-1 rounded-full bg-primary/20"><div class="h-full w-11/12 rounded-full bg-primary"></div></div>
+</div>
+<div class="flex items-center gap-3 text-sm">
+<span class="material-symbols-outlined text-primary text-xl">visibility</span>
+<span class="w-20">Perception</span>
+<div class="h-1.5 w-full flex-1 rounded-full bg-primary/20"><div class="h-full w-4/5 rounded-full bg-primary"></div></div>
+</div>
+<div class="flex items-center gap-3 text-sm">
+<span class="material-symbols-outlined text-primary text-xl">fitness_center</span>
+<span class="w-20">Strength</span>
+<div class="h-1.5 w-full flex-1 rounded-full bg-primary/20"><div class="h-full w-2/5 rounded-full bg-primary"></div></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Character Card 2: The Sunstone Mage (Selected) -->
+<div class="group selected relative cursor-pointer overflow-hidden rounded-xl border border-primary p-1 backdrop-blur-sm transition-all duration-300 ring-2 ring-primary">
+<div class="relative aspect-[3/4] w-full overflow-hidden rounded-lg">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="A powerful sorcerer wielding a glowing staff amidst ancient ruins." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA6xzpxRu3mD23R1giUYzbNopmM4i49g7uSXIh02HwSRipvPI78YGVfZDxLZ_2YgLx-B1Zs2aCzTHKCrVwa8R-1WEeNllK9l3U8mK9INZl44sqR7iYkRbPxSqG5IjkeXCOelD03L40HU7XXtE2NZPuFTG0qR8-HyVF6NU3bYTpzbkfXGZ5O2D_vMFqZlFfO_OEjOIHl-nZokK1GgvPdBlqUjlUpWHGJVcImqBSTMFi3z9OunCTTbW6hJP8Jjs1TgB2j5laUPsgWIs-L');"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+<div class="absolute bottom-0 left-0 w-full p-4">
+<h2 class="text-white text-2xl font-bold leading-tight">The Sunstone Mage</h2>
+</div>
+</div>
+<div class="absolute inset-0 top-auto z-10 flex h-full flex-col justify-end bg-background-dark/90 p-5 opacity-0 backdrop-blur-md transition-opacity duration-300 group-hover:opacity-100">
+<h3 class="text-white text-xl font-bold">The Sunstone Mage</h3>
+<p class="mt-2 text-sm text-[#a492c9]">A keeper of ancient knowledge, channeling the raw power of the elements and celestial light.</p>
+<div class="mt-4 space-y-2 text-white">
+<div class="flex items-center gap-3 text-sm">
+<span class="material-symbols-outlined text-primary text-xl">neurology</span>
+<span class="w-20">Intellect</span>
+<div class="h-1.5 w-full flex-1 rounded-full bg-primary/20"><div class="h-full w-full rounded-full bg-primary"></div></div>
+</div>
+<div class="flex items-center gap-3 text-sm">
+<span class="material-symbols-outlined text-primary text-xl">auto_awesome</span>
+<span class="w-20">Magic</span>
+<div class="h-1.5 w-full flex-1 rounded-full bg-primary/20"><div class="h-full w-10/12 rounded-full bg-primary"></div></div>
+</div>
+<div class="flex items-center gap-3 text-sm">
+<span class="material-symbols-outlined text-primary text-xl">favorite</span>
+<span class="w-20">Vitality</span>
+<div class="h-1.5 w-full flex-1 rounded-full bg-primary/20"><div class="h-full w-1/3 rounded-full bg-primary"></div></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Character Card 3: The Ironclad Guardian -->
+<div class="group relative cursor-pointer overflow-hidden rounded-xl border border-white/10 bg-white/5 p-1 backdrop-blur-sm transition-all duration-300 hover:border-primary/80 hover:ring-2 hover:ring-primary/50 group-[selected]:border-primary group-[selected]:ring-2 group-[selected]:ring-primary">
+<div class="relative aspect-[3/4] w-full overflow-hidden rounded-lg">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="A heavily armored knight with a large shield, standing firm on a battlefield." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDfT41YQtqkERrDlgV0s5jg7H_cytQiqm5tAQHMIyu4r7hWNd1fugKnuRwMmNQjdzZv5XLwyHzXwcn2N2jq8NFj1-RrRvpCowAx-Y_WurQQ16-0Qq-6oYW-4PWDOtaKMKg93bSeKpiZr7KsbZ3zvBEe0a3NlsLFpQEiKA3ajzX5chdhz1Bz14cRsBvLbKjfV7W8cQwacFdGkakFdvJvpbiNSTVwAdyUQV7lvc4E3QDaX92wd7FSg7TPM__glOLs1jtBgH5g9wdkc3pE');"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+<div class="absolute bottom-0 left-0 w-full p-4">
+<h2 class="text-white text-2xl font-bold leading-tight">The Ironclad Guardian</h2>
+</div>
+</div>
+<div class="absolute inset-0 top-auto z-10 flex h-full flex-col justify-end bg-background-dark/90 p-5 opacity-0 backdrop-blur-md transition-opacity duration-300 group-hover:opacity-100">
+<h3 class="text-white text-xl font-bold">The Ironclad Guardian</h3>
+<p class="mt-2 text-sm text-[#a492c9]">An unbreakable bastion of strength and loyalty, standing as an immovable shield against the darkness.</p>
+<div class="mt-4 space-y-2 text-white">
+<div class="flex items-center gap-3 text-sm">
+<span class="material-symbols-outlined text-primary text-xl">fitness_center</span>
+<span class="w-20">Strength</span>
+<div class="h-1.5 w-full flex-1 rounded-full bg-primary/20"><div class="h-full w-10/12 rounded-full bg-primary"></div></div>
+</div>
+<div class="flex items-center gap-3 text-sm">
+<span class="material-symbols-outlined text-primary text-xl">shield</span>
+<span class="w-20">Defense</span>
+<div class="h-1.5 w-full flex-1 rounded-full bg-primary/20"><div class="h-full w-full rounded-full bg-primary"></div></div>
+</div>
+<div class="flex items-center gap-3 text-sm">
+<span class="material-symbols-outlined text-primary text-xl">directions_run</span>
+<span class="w-20">Agility</span>
+<div class="h-1.5 w-full flex-1 rounded-full bg-primary/20"><div class="h-full w-1/4 rounded-full bg-primary"></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Confirmation Button -->
+<div class="mt-8 md:mt-12 w-full flex justify-center">
+<button class="flex w-full max-w-xs cursor-pointer items-center justify-center overflow-hidden rounded-lg h-14 px-5 bg-primary text-white text-lg font-bold leading-normal tracking-[0.015em] transition-all duration-300 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 disabled:cursor-not-allowed disabled:bg-gray-500">
+<span class="truncate">Begin Journey</span>
+</button>
+</div>
+</div>
+</div>
+</body></html>
